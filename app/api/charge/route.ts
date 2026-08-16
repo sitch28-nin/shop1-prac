@@ -6,8 +6,6 @@ export const POST = async(request: NextRequest) => {
         const { token, orderId, amount } = await request.json();
 
         const secretKey = process.env.OMISE_SECRET_KEY!;
-        console.log("SECRET KEY:", JSON.stringify(secretKey));
-        console.log("LENGTH:", secretKey.length);
         const encodeKey = Buffer.from(`${secretKey}:`).toString("base64");
 
         const omiseRes = await fetch("https://api.omise.co/charges", {
