@@ -7,7 +7,7 @@ export const POST = async( request: NextRequest) => {
 
         console.log("ได้รับ webhook: ", event.key);
 
-        if (event.key === "charge.complete") {
+        if (event.key === "charge.complete" || event.key === "charge.create") {
             const charge = event.data;
 
             if (charge.status === "successful") {
