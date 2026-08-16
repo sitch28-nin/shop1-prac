@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f4ee;
+  --foreground: #111827;
+  --card: rgba(255, 255, 255, 0.82);
+  --muted: #6b7280;
+  --primary: #1f3a2d;
+  --primary-soft: #2d4739;
+  --accent: #d9b77b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(217, 183, 123, 0.18), transparent 28%),
+    linear-gradient(180deg, #f7f4ee 0%, #f3f1ee 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(31, 58, 45, 0.16);
+}
+
+@layer utilities {
+  .page-shell {
+    @apply mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8;
+  }
+
+  .panel {
+    @apply rounded-3xl border border-slate-200/80 bg-white/85 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur-sm;
+  }
+
+  .soft-badge {
+    @apply inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-800;
+  }
+
+  .primary-btn {
+    @apply inline-flex items-center justify-center rounded-xl bg-[#1f3a2d] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#274336] focus:outline-none focus:ring-2 focus:ring-emerald-300;
+  }
+
+  .secondary-btn {
+    @apply inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-200;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-slate-200 bg-white/80 px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 shadow-sm outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100;
+  }
+}
+
+
