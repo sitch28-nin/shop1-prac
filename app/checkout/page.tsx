@@ -18,7 +18,7 @@ const CheckoutPage = () => {
     setLoading(true);
     setError("");
 
-    await fetch('/api/orders', {
+    const response = await fetch('/api/orders', {
       method: "POST",
       headers: {
         "Content-Type" : "application/json",
@@ -27,9 +27,19 @@ const CheckoutPage = () => {
         items: items.map((item) => ({
           productId : item.id,
           quantity: item.quantity,
-        }))
-      })
-    })
+        })),
+      }),
+    });
+
+    const result = await response.json();
+    console.log(response.status);
+    console.log(result);
+
+    if (!response.ok) {
+      setError(result.error);
+      setLoading(false);
+      return;
+    }
 
     const supabase = createClient();
     const {
