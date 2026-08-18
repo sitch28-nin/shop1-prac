@@ -2,7 +2,7 @@
 
 import { useCartStore } from "@/lib/cart-store";
 
-const AddToCartBtn = ({ product }: { product: { id: number; name_product: string; price: number } }) => {
+const AddToCartBtn = ({ product }: { product: { id: number; name_product: string; price: number; stock: number} }) => {
   const addItem = useCartStore((state) => state.addItem);
 
   const handleClick = () => {

@@ -41,7 +41,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             </div>
 
             <div className="mt-8">
-              <AddToCartBtn product={{ id: product.id, name_product: product.name_product, price: product.price }} />
+              <AddToCartBtn product={{ id: product.id, name_product: product.name_product, price: product.price , stock: product.stock}} />
             </div>
           </div>
         </div>
