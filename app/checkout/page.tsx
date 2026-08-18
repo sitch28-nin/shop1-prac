@@ -18,6 +18,19 @@ const CheckoutPage = () => {
     setLoading(true);
     setError("");
 
+    await fetch('/api/orders', {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify({
+        items: items.map((item) => ({
+          productId : item.id,
+          quantity: item.quantity,
+        }))
+      })
+    })
+
     const supabase = createClient();
     const {
       data: { user },
