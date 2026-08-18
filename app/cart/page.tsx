@@ -44,7 +44,9 @@ const CartPage = () => {
 
       <div className="grid gap-8 lg:grid-cols-[1.5fr_0.8fr]">
         <div className="space-y-4">
-          {items.map((item) => (
+          {items.map((item) => {
+            const isAtStockLimit = item.quantity >= item.stock;
+            return(
             <div
               key={item.id}
               className="panel flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5"
@@ -52,7 +54,9 @@ const CartPage = () => {
               <div className="min-w-0">
                 <h2 className="text-lg font-semibold text-slate-900">{item.name_product}</h2>
                 <p className="mt-1 text-sm text-slate-500">ราคาต่อชิ้น {item.price.toLocaleString()} บาท</p>
-                <button onClick={() => increaseItem(item.id)} className="bg-black border rounded-2xl px-2.5 text-white cursor-pointer">+</button>
+                <button onClick={() => increaseItem(item.id)} disabled={isAtStockLimit} className="bg-black border rounded-2xl px-2.5 text-white cursor-pointer">
+                  {isAtStockLimit ? "ถึงจำนวนสูงสุดแล้ว" : "+"}
+                </button>
                 <p className="mt-1 text-sm text-slate-500">จำนวน {item.quantity} ชิ้น</p>
                 <button onClick={() => decreaseItem(item.id)} className="bg-black border rounded-2xl px-3 text-white cursor-pointer">-</button>
               </div>
@@ -69,7 +73,8 @@ const CartPage = () => {
                 </button>
               </div>
             </div>
-          ))}
+          );
+        })}
         </div>
 
         <aside className="panel h-fit p-6">
