@@ -6,9 +6,12 @@ import { useCartStore } from "@/lib/cart-store";
 const CartPage = () => {
   const items = useCartStore((state) => state.items);
   const removeItem = useCartStore((state) => state.removeItem);
+  const clearCart = useCartStore((state) => state.clearCart);
+  const increaseItem = useCartStore((state) => state.increaseItem);
+  const decreaseItem = useCartStore((state) => state.decreaseItem);
 
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const total = items.reduce((sum, item) => sum + (item?.price ?? 0) * (item?.quantity ?? 0), 0);
+  const itemCount = items.reduce((sum, item) => sum + (item?.quantity ?? 0), 0);
 
   if (items.length === 0) {
     return (
@@ -49,7 +52,9 @@ const CartPage = () => {
               <div className="min-w-0">
                 <h2 className="text-lg font-semibold text-slate-900">{item.name_product}</h2>
                 <p className="mt-1 text-sm text-slate-500">ราคาต่อชิ้น {item.price.toLocaleString()} บาท</p>
+                <button onClick={() => increaseItem(item.id)} className="bg-black border rounded-2xl px-2.5 text-white cursor-pointer">+</button>
                 <p className="mt-1 text-sm text-slate-500">จำนวน {item.quantity} ชิ้น</p>
+                <button onClick={() => decreaseItem(item.id)} className="bg-black border rounded-2xl px-3 text-white cursor-pointer">-</button>
               </div>
 
               <div className="flex items-center gap-4 sm:justify-end">
@@ -91,6 +96,7 @@ const CartPage = () => {
           <Link href="/checkout" className="primary-btn mt-6 w-full">
             ดำเนินการชำระเงิน
           </Link>
+          <button onClick={clearCart} className="primary-btn mt-6 w-full">ล้างตะกร้า</button>
         </aside>
       </div>
     </div>
